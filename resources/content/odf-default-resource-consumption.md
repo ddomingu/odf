@@ -12,22 +12,22 @@ Since ODF 4.15, different performance profiles have been provided to enhance per
 
 These are the core pods we have when running ODF in internal mode and their resource consumption:
 
-| **Component** |             **Name**            | **OCP object** |     **Number of pods**    |      **CPU**      |      **Memory**     |
-|:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:-----------------:|:-------------------:|
-|   Operators   |           ocs-operator          |   deployment   |             1             |    R: - / L: -    |     R: - / L: -     |
-|   Operators   |           odf-console           |   deployment   |             1             | R: 100m / L: 100m | R: 512Mi / L: 512Mi |
-|   Operators   | odf-operator-controller-manager |   deployment   |             1             | R: 200m / L: 200m | R: 200Mi / L: 300Mi |
-|   Operators   |        rook-ceph-operator       |   deployment   |             1             |    R: - / L: -    |     R: - / L: -     |
-|   Operators   |         noobaa-operator         |   deployment   |             1             |   R: - / L: 250m  |   R: - / L: 512Mi   |
-|    Helpers    |        ux-backend-server        |   deployment   |             1             |    R: - / L: -    |     R: - / L: -     |
-|    Helpers    |       ocs-metrics-exporter      |   deployment   |             1             |    R: - / L: -    |     R: - / L: -     |
-|      CSI      |          csi-rbdplugin          |    daemonset   |  As many as worker nodes  |    R: - / L: -    |     R: - / L: -     |
-|      CSI      |    csi-rbdplugin-provisioner    |   deployment   |             2             |    R: - / L: -    |     R: - / L: -     |
-|      CSI      |  csi-addons-controller-manager  |   deployment   |             1             |   R: 10m / L: 1   |  R: 64Mi / L: 512Mi |
-|     NooBaa    |         noobaa-endpoint         |       HPA      |      Min: 1 - Max: 2      | R: 999m / L: 999m |   R: 2Gi / L: 2Gi   |
-|     NooBaa    |           noobaa-core           |   statefulset  |             1             | R: 999m / L: 999m |   R: 4Gi / L: 4Gi   |
-|     NooBaa    |           noobaa-db-pg          |   statefulset  |             1             | R: 500m / L: 500m |   R: 4Gi / L: 4Gi   |
-|     NooBaa    |       noobaa-backing-store      |       pod      | As many as backing stores | R: 100m / L: 100m | R: 400Mi / L: 400Mi |
+| **Component** |             **Name**            | **OCP object** |     **Number of pods**    |     **CPU**     |     **Memory**    |
+|:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:---------------:|:-----------------:|
+|   Operators   |           ocs-operator          |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
+|   Operators   |           odf-console           |   deployment   |             1             | R:100m / L:100m | R:512Mi / L:512Mi |
+|   Operators   | odf-operator-controller-manager |   deployment   |             1             | R:200m / L:200m | R:200Mi / L:300Mi |
+|   Operators   |        rook-ceph-operator       |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
+|   Operators   |         noobaa-operator         |   deployment   |             1             |   R:- / L:250m  |   R:- / L:512Mi   |
+|    Helpers    |        ux-backend-server        |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
+|    Helpers    |       ocs-metrics-exporter      |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |          csi-rbdplugin          |    daemonset   |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |    csi-rbdplugin-provisioner    |   deployment   |             2             |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |  csi-addons-controller-manager  |   deployment   |             1             |   R:10m / L:1   |  R:64Mi / L:512Mi |
+|     NooBaa    |         noobaa-endpoint         |       HPA      |      Min: 1 - Max: 2      | R:999m / L:999m |   R:2Gi / L:2Gi   |
+|     NooBaa    |           noobaa-core           |   statefulset  |             1             | R:999m / L:999m |   R:4Gi / L:4Gi   |
+|     NooBaa    |           noobaa-db-pg          |   statefulset  |             1             | R:500m / L:500m |   R:4Gi / L:4Gi   |
+|     NooBaa    |       noobaa-backing-store      |       pod      | As many as backing stores | R:100m / L:100m | R:400Mi / L:400Mi |
 
 #### Additional features
 
