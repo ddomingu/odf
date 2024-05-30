@@ -29,9 +29,12 @@ These are the core pods we have when running ODF in internal mode and their reso
 |     NooBaa    |           noobaa-db-pg          |   statefulset  |             1             | R:500m / L:500m |   R:4Gi / L:4Gi   |
 |     NooBaa    |       noobaa-backing-store      |       pod      | As many as backing stores | R:100m / L:100m | R:400Mi / L:400Mi |
 
-#### Additional features
+#### Additional ODF features
 
-
+| **Component** |             **Name**            | **OCP object** |     **Number of pods**    |     **CPU**     |     **Memory**    |
+|:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:---------------:|:-----------------:|
+|      NFS      |                nfs              |   deployment   |             1             |    R:3 / L:3    |   R:8Gi / L:8Gi   |
+|   RBD-mirror  |            rbd-mirror           |   deployment   |             1             |    R:1 / L:1    |   R:2Gi / L:2Gi   |
 
 #### Lean
 
