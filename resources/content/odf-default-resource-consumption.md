@@ -23,30 +23,66 @@ These are the core pods we have when running ODF in internal mode and their reso
 |    Helpers    |       ocs-metrics-exporter      |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
 |      CSI      |          csi-rbdplugin          |    daemonset   |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
 |      CSI      |    csi-rbdplugin-provisioner    |   deployment   |             2             |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |        csi-cephfsplugin         |    daemonset   |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |  csi-cephfsplugin-provisioner   |   deployment   |             2             |    R:- / L:-    |     R:- / L:-     |
 |      CSI      |  csi-addons-controller-manager  |   deployment   |             1             |   R:10m / L:1   |  R:64Mi / L:512Mi |
-|     NooBaa    |         noobaa-endpoint         |       HPA      |      Min: 1 - Max: 2      | R:999m / L:999m |   R:2Gi / L:2Gi   |
-|     NooBaa    |           noobaa-core           |   statefulset  |             1             | R:999m / L:999m |   R:4Gi / L:4Gi   |
-|     NooBaa    |           noobaa-db-pg          |   statefulset  |             1             | R:500m / L:500m |   R:4Gi / L:4Gi   |
-|     NooBaa    |       noobaa-backing-store      |       pod      | As many as backing stores | R:100m / L:100m | R:400Mi / L:400Mi |
+|     Crash     |        csi-cephfsplugin         |    daemonset   |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+|    NooBaa     |         noobaa-endpoint         |       HPA      |      Min: 1 - Max: 2      | R:999m / L:999m |   R:2Gi / L:2Gi   |
+|    NooBaa     |           noobaa-core           |   statefulset  |             1             | R:999m / L:999m |   R:4Gi / L:4Gi   |
+|    NooBaa     |           noobaa-db-pg          |   statefulset  |             1             | R:500m / L:500m |   R:4Gi / L:4Gi   |
+|    NooBaa     |       noobaa-backing-store      |       pod      | As many as backing stores | R:100m / L:100m | R:400Mi / L:400Mi |
 
 #### Additional ODF features
 
 | **Component** |             **Name**            | **OCP object** |     **Number of pods**    |     **CPU**     |     **Memory**    |
 |:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:---------------:|:-----------------:|
 |      NFS      |                nfs              |   deployment   |             1             |    R:3 / L:3    |   R:8Gi / L:8Gi   |
-|   RBD-mirror  |            rbd-mirror           |   deployment   |             1             |    R:1 / L:1    |   R:2Gi / L:2Gi   |
+|      CSI      |          csi-nfsplugin          |    daemonset   |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |    csi-nfsplugin-provisioner    |   deployment   |             2             |    R:- / L:-    |     R:- / L:-     |
+|      Ceph     |            rbd-mirror           |   deployment   |             1             |    R:1 / L:1    |   R:2Gi / L:2Gi   |
+|     Tools     |         rook-ceph-tools         |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
 
 #### Lean
 
 These are the core pods we have when running ODF in internal mode using the `lean` performance profile and their resource consumption:
 
+| **Component** |             **Name**            | **OCP object** |     **Number of pods**    |     **CPU**     |     **Memory**    |
+|:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:---------------:|:-----------------:|
+|     Ceph      |          rook-ceph-mgr          |   deployment   |             2             |   R:0.5 / L:1   |   R:1Gi / L:2Gi   |
+|     Ceph      |          rook-ceph-mon          |   deployment   |             3             |  R:0.5 / L:0.5  |   R:1Gi / L:1Gi   |
+|     Ceph      |          rook-ceph-osd          |   deployment   |    As many as devices     |  R:1.5 / L:1.5  |   R:3Gi / L:3Gi   |
+|     Ceph      |          rook-ceph-mds          |   deployment   |             2             |    R:1 / L:1    |   R:2Gi / L:2Gi   |
+|     Ceph      |          rook-ceph-rgw          |   deployment   |             1             |    R:1 / L:1    |   R:1Gi / L:1Gi   |
+|    Crash      |    rook-ceph-crashcollector     |   daemonset    |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+|   Exporter    |       rook-ceph-exporter        |   daemonset    |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+
 #### Balanced
 
 These are the core pods we have when running ODF in internal mode using the `balanced` performance profile and their resource consumption:
 
+| **Component** |             **Name**            | **OCP object** |     **Number of pods**    |     **CPU**     |     **Memory**    |
+|:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:---------------:|:-----------------:|
+|     Ceph      |          rook-ceph-mgr          |   deployment   |             2             |    R:1 / L:2    |  R:1.5Gi / L:3Gi  |
+|     Ceph      |          rook-ceph-mon          |   deployment   |             3             |    R:1 / L:1    |   R:2Gi / L:2Gi   |
+|     Ceph      |          rook-ceph-osd          |   deployment   |    As many as devices     |    R:2 / L:2    |   R:5Gi / L:5Gi   |
+|     Ceph      |          rook-ceph-mds          |   deployment   |             2             |    R:2 / L:2    |   R:6Gi / L:6Gi   |
+|     Ceph      |          rook-ceph-rgw          |   deployment   |             1             |    R:2 / L:2    |   R:2Gi / L:2Gi   |
+|    Crash      |    rook-ceph-crashcollector     |   daemonset    |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+|   Exporter    |       rook-ceph-exporter        |   daemonset    |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+
 #### Performance
 
 These are the core pods we have when running ODF in internal mode using the `performance` performance profile and their resource consumption:
+
+| **Component** |             **Name**            | **OCP object** |     **Number of pods**    |     **CPU**     |     **Memory**    |
+|:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:---------------:|:-----------------:|
+|     Ceph      |          rook-ceph-mgr          |   deployment   |             2             |   R:1.5 / L:3   |   R:2Gi / L:4Gi   |
+|     Ceph      |          rook-ceph-mon          |   deployment   |             3             |  R:1.5 / L:1.5  |   R:3Gi / L:3Gi   |
+|     Ceph      |          rook-ceph-osd          |   deployment   |    As many as devices     |    R:4 / L:4    |   R:8Gi / L:8Gi   |
+|     Ceph      |          rook-ceph-mds          |   deployment   |             2             |    R:3 / L:3    |   R:8Gi / L:8Gi   |
+|     Ceph      |          rook-ceph-rgw          |   deployment   |             1             |    R:2 / L:2    |   R:4Gi / L:4Gi   |
+|    Crash      |    rook-ceph-crashcollector     |   daemonset    |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+|   Exporter    |       rook-ceph-exporter        |   daemonset    |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
 
 ## ODF External
 
@@ -54,19 +90,19 @@ These are the core pods we have when running ODF in internal mode using the `per
 
 These are the core pods we have when running ODF in external mode and their resource consumption:
 
-| **Component** |             **Name**            | **OCP object** |     **Number of pods**    |          **CPU**          |          **Memory**         |
-|:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:-------------------------:|:---------------------------:|
-|   Operators   |           ocs-operator          |   deployment   |             1             |    Request: - Limit: -    |     Request: - Limit: -     |
-|   Operators   |           odf-console           |   deployment   |             1             | Request: 100m Limit: 100m | Request: 512Mi Limit: 512Mi |
-|   Operators   | odf-operator-controller-manager |   deployment   |             1             | Request: 200m Limit: 200m | Request: 200Mi Limit: 300Mi |
-|   Operators   |        rook-ceph-operator       |   deployment   |             1             |    Request: - Limit: -    |     Request: - Limit: -     |
-|   Operators   |         noobaa-operator         |   deployment   |             1             |   Request: - Limit: 250m  |   Request: - Limit: 512Mi   |
-|    Helpers    |        ux-backend-server        |   deployment   |             1             |    Request: - Limit: -    |     Request: - Limit: -     |
-|    Helpers    |       ocs-metrics-exporter      |   deployment   |             1             |    Request: - Limit: -    |     Request: - Limit: -     |
-|      CSI      |          csi-rbdplugin          |    daemonset   |  As many as worker nodes  |    Request: - Limit: -    |     Request: - Limit: -     |
-|      CSI      |    csi-rbdplugin-provisioner    |   deployment   |             2             |    Request: - Limit: -    |     Request: - Limit: -     |
-|      CSI      |  csi-addons-controller-manager  |   deployment   |             1             |   Request: 10m Limit: 1   |  Request: 64Mi Limit: 512Mi |
-|     NooBaa    |         noobaa-endpoint         |       HPA      |      Min: 1 - Max: 2      | Request: 999m Limit: 999m |   Request: 2Gi Limit: 2Gi   |
-|     NooBaa    |           noobaa-core           |   statefulset  |             1             | Request: 999m Limit: 999m |   Request: 4Gi Limit: 4Gi   |
-|     NooBaa    |           noobaa-db-pg          |   statefulset  |             1             | Request: 500m Limit: 500m |   Request: 4Gi Limit: 4Gi   |
-|     NooBaa    |       noobaa-backing-store      |       pod      | As many as backing stores | Request: 100m Limit: 100m | Request: 400Mi Limit: 400Mi |
+| **Component** |             **Name**            | **OCP object** |     **Number of pods**    |     **CPU**     |     **Memory**    |
+|:-------------:|:-------------------------------:|:--------------:|:-------------------------:|:---------------:|:-----------------:|
+|   Operators   |           ocs-operator          |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
+|   Operators   |           odf-console           |   deployment   |             1             | R:100m / L:100m | R:512Mi / L:512Mi |
+|   Operators   | odf-operator-controller-manager |   deployment   |             1             | R:200m / L:200m | R:200Mi / L:300Mi |
+|   Operators   |        rook-ceph-operator       |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
+|   Operators   |         noobaa-operator         |   deployment   |             1             |   R:- / L:250m  |   R:- / L:512Mi   |
+|    Helpers    |        ux-backend-server        |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
+|    Helpers    |       ocs-metrics-exporter      |   deployment   |             1             |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |          csi-rbdplugin          |    daemonset   |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |    csi-rbdplugin-provisioner    |   deployment   |             2             |    R:- / L:-    |     R:- / L:-     |
+|      CSI      |  csi-addons-controller-manager  |   deployment   |             1             |   R:10m / L:1   |  R:64Mi / L:512Mi |
+|     NooBaa    |         noobaa-endpoint         |       HPA      |      Min: 1 - Max: 2      | R:999m / L:999m |   R:2Gi / L:2Gi   |
+|     NooBaa    |           noobaa-core           |   statefulset  |             1             | R:999m / L:999m |   R:4Gi / L:4Gi   |
+|     NooBaa    |           noobaa-db-pg          |   statefulset  |             1             | R:500m / L:500m |   R:4Gi / L:4Gi   |
+|     NooBaa    |       noobaa-backing-store      |       pod      | As many as backing stores | R:100m / L:100m | R:400Mi / L:400Mi |
