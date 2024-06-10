@@ -26,7 +26,6 @@ These are the core pods we have when running ODF in internal mode and their reso
 |      CSI      |        csi-cephfsplugin         |    daemonset   |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
 |      CSI      |  csi-cephfsplugin-provisioner   |   deployment   |             2             |    R:- / L:-    |     R:- / L:-     |
 |      CSI      |  csi-addons-controller-manager  |   deployment   |             1             |   R:10m / L:1   |  R:64Mi / L:512Mi |
-|     Crash     |        csi-cephfsplugin         |    daemonset   |  As many as worker nodes  |    R:- / L:-    |     R:- / L:-     |
 |    NooBaa     |         noobaa-endpoint         |       HPA      |      Min: 1 - Max: 2      | R:999m / L:999m |   R:2Gi / L:2Gi   |
 |    NooBaa     |           noobaa-core           |   statefulset  |             1             | R:999m / L:999m |   R:4Gi / L:4Gi   |
 |    NooBaa     |           noobaa-db-pg          |   statefulset  |             1             | R:500m / L:500m |   R:4Gi / L:4Gi   |
